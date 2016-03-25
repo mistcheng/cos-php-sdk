@@ -15,9 +15,9 @@ class Auth
      */
     public static function appSign($expired, $bucketName) {
 
-        $appId = Conf::APPID;
-        $secretId = Conf::SECRET_ID;
-        $secretKey = Conf::SECRET_KEY;
+        $appId = Conf::$app_id;
+        $secretId = Conf::$secret_id;
+        $secretKey = Conf::$secret_key;
         
         if (empty($secretId) || empty($secretKey) || empty($appId)) {
             return self::AUTH_SECRET_ID_KEY_ERROR;
@@ -34,9 +34,9 @@ class Auth
      */
     public static function appSign_once($path, $bucketName) {
 
-        $appId = Conf::APPID;
-        $secretId = Conf::SECRET_ID;
-        $secretKey = Conf::SECRET_KEY;
+        $appId = Conf::$app_id;
+        $secretId = Conf::$secret_id;
+        $secretKey = Conf::$secret_key;
 
         if (preg_match('/^\//', $path) == 0) {
             $path = '/' . $path;
@@ -59,9 +59,9 @@ class Auth
      */
     public static function appSign_multiple($path, $bucketName, $expired) {
 
-        $appId = Conf::APPID;
-        $secretId = Conf::SECRET_ID;
-        $secretKey = Conf::SECRET_KEY;
+        $appId = Conf::$app_id;
+        $secretId = Conf::$secret_id;
+        $secretKey = Conf::$secret_key;
 
         if (preg_match('/^\//', $path) == 0) {
             $path = '/' . $path;

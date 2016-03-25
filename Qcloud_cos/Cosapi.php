@@ -36,7 +36,7 @@ class Cosapi
     }
     
     public static function generateResUrl($bucketName, $dstPath) {
-        return Conf::API_COSAPI_END_POINT . Conf::APPID . '/' . $bucketName . $dstPath;
+        return Conf::API_COSAPI_END_POINT . Conf::app_id . '/' . $bucketName . $dstPath;
     }
         
     public static function sendRequest($req) {
