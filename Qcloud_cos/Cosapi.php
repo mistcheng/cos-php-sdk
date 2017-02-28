@@ -474,7 +474,36 @@ class Cosapi
             $path = '/' . $path;
         }
 
-        return self::updateBase($bucketName, $path, $bizAttr);
+        return self::updateAttrBase($bucketName, $path, $bizAttr);
+    }
+
+    private static function updateAttrBase($bucketName, $path,
+                                       $bizAttr = []) {
+
+        $path = self::cosUrlEncode($path);
+        $expired = time() + self::EXPIRED_SECONDS;
+        $url = self::generateResUrl($bucketName, $path);
+        $sign = Auth::appSign_once(
+            $path, $bucketName);
+
+        $data = array(
+                'op' => 'update',
+            ) + $bizAttr;
+
+        $data = json_encode($data);
+
+        $req = array(
+            'url' => $url,
+            'method' => 'post',
+            'timeout' => self::$timeout,
+            'data' => $data,
+            'header' => array(
+                'Authorization:'.$sign,
+                'Content-Type: application/json',
+            ),
+        );
+
+        return self::sendRequest($req);
     }
 
     private static function updateBase($bucketName, $path, 
